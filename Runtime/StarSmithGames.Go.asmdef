@@ -1,0 +1,17 @@
+{
+    "name": "StarSmithGames.Go",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d7239571118ead0459fa4962229544f6",
+        "GUID:de359628afdf7fa4db68fb48a1532133"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
