@@ -1,11 +1,6 @@
 {
-    "name": "StarSmithGames.Go",
-    "rootNamespace": "",
+    "name": "MoreMountains.NiceVibrations",
     "references": [
-        "GUID:d7239571118ead0459fa4962229544f6",
-        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
-        "GUID:de359628afdf7fa4db68fb48a1532133",
-        "GUID:865b414a121ed594e91db2e09f65d38c",
         "GUID:041029188fa88c54f9efffc039b6a1c9",
         "GUID:426ad1839a76a3e4db8c1e4fde3eb745"
     ],
@@ -16,6 +11,5 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+    "versionDefines": []
 }
