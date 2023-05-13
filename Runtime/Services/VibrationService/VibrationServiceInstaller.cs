@@ -4,8 +4,8 @@ using Zenject;
 
 namespace StarSmithGames.Go.VibrationService
 {
-	[CreateAssetMenu(fileName = "VibrationInstaller", menuName = "Installers/VibrationInstaller")]
-	public class VibrationInstaller : ScriptableObjectInstaller
+	[CreateAssetMenu(fileName = "VibrationServiceInstaller", menuName = "Installers/VibrationServiceInstaller")]
+	public class VibrationServiceInstaller : ScriptableObjectInstaller
 	{
 		public override void InstallBindings()
 		{
