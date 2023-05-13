@@ -10,12 +10,13 @@ namespace StarSmithGames.Go
 	[RequireComponent(typeof(Button))]
     public class UIButtonComponent : MonoBehaviour
     {
-        [SerializeField] private Button button;
+        [SerializeField]
+		private Button button;
 
 		[Inject]
 		private IVibrationService vibrationService;
 
-		private void Awake()
+		protected virtual void Awake()
 		{
 			if(button == null)
 			{
@@ -25,12 +26,12 @@ namespace StarSmithGames.Go
 			button.onClick.AddListener(OnClicked);
 		}
 
-		private void OnDestroy()
+		protected virtual void OnDestroy()
 		{
 			button.onClick.RemoveAllListeners();
 		}
 
-		private void OnClicked()
+		protected virtual void OnClicked()
 		{
 			vibrationService.Vibrate();
 		}
