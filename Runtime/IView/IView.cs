@@ -12,9 +12,9 @@ using UnityEditor;
 
 namespace StarSmithGames.Go
 {
-	public interface IWindow : IShowable { }
+	public interface IView : IShowable { }
 
-	public abstract class WindowBase : MonoBehaviour, IWindow
+	public abstract class ViewBase : MonoBehaviour, IView
 	{
 		public bool IsShowing { get; protected set; }
 		public bool IsInProcess { get; protected set; }
@@ -73,7 +73,7 @@ namespace StarSmithGames.Go
 		}
 	}
 
-	public abstract class WindowPopupBase : WindowBase
+	public abstract class ViewPopupBase : ViewBase
 	{
 		public Transform window;
 
@@ -120,7 +120,7 @@ namespace StarSmithGames.Go
 		}
 	}
 
-	public abstract class WindowQuartBase : WindowPopupBase
+	public abstract class ViewQuartBase : ViewPopupBase
 	{
 		public override void Show(Action callback = null)
 		{
