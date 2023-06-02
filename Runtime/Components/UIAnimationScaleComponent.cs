@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace StarSmithGames.Go
 {
-	public class UIAnimationScaleComponent : MonoBehaviour
+	public class UIAnimationScaleComponent : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
 		[SerializeField] private Transform target;
 		[SerializeField] private float scaleMultiply = 0.95f;
@@ -27,7 +27,7 @@ namespace StarSmithGames.Go
 
 		public void OnPointerDown(PointerEventData eventData)
 		{
-			TryForceComplete();
+			sequence?.Complete(true);
 
 			sequence = DOTween.Sequence();
 			sequence
@@ -37,20 +37,12 @@ namespace StarSmithGames.Go
 
 		public void OnPointerUp(PointerEventData eventData)
 		{
-			TryForceComplete();
+			sequence?.Complete(true);
 
 			sequence = DOTween.Sequence();
 			sequence
 				.Append(target.DOScale(startScale, 0.1f))
 				.SetEase(Ease.Linear);
-		}
-
-		private void TryForceComplete()
-		{
-			if (sequence != null)
-			{
-				sequence.Complete(true);
-			}
 		}
 	}
 }
