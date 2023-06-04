@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 
+#if ENABLE_UNITY_ANALYTICS
 using UnityEngine.Analytics;
+#endif
 
 namespace StarSmithGames.Go.AnalyticsSystem
 {
@@ -10,6 +12,7 @@ namespace StarSmithGames.Go.AnalyticsSystem
 		void LogEvent(string id, Dictionary<string, object> parameters);
 	}
 
+#if ENABLE_UNITY_ANALYTICS
 	public class UnityAnalyticsGroup : IAnalyticsGroup
 	{
 		public void LogEvent(string id)
@@ -22,28 +25,29 @@ namespace StarSmithGames.Go.AnalyticsSystem
 			Analytics.CustomEvent(id, parameters);
 		}
 	}
+#endif
 
-#if ENABLE_AMPLITUDE
+#if ENABLE_AMPLITUDE_ANALYTICS
 	public class AmplitudeAnalyticsGroup : IAnalyticsGroup
 	{
 		private Amplitude instance;
 
-		public AmplitudeAnalyticsGroup(string apiKey)
+		public AmplitudeAnalyticsGroup(AmplitudeSettings settings)
 		{
 			instance = Amplitude.Instance;
 			instance.logging = true;
 			instance.trackSessionEvents(true);
-			//instance.init(apiKey);
+			instance.init(settings.apiKey);
 		}
 
 		public void LogEvent(string id)
 		{
-			//instance.logEvent(id);
+			instance.logEvent(id);
 		}
 
 		public void LogEvent(string id, Dictionary<string, object> parameters)
 		{
-			//instance.logEvent(id, parameters);
+			instance.logEvent(id, parameters);
 		}
 	}
 #endif

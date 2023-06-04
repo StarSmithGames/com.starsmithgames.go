@@ -9,7 +9,7 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [
-        "ENABLE_AMPLITUDE"
+        "ENABLE_AMPLITUDE_ANALYTICS"
     ],
     "versionDefines": [],
     "noEngineReferences": false

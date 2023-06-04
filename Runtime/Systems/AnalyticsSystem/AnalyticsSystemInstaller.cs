@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using UnityEngine;
 
 using Zenject;
@@ -8,21 +9,40 @@ namespace StarSmithGames.Go.AnalyticsSystem
 	[CreateAssetMenu(fileName = "AnalyticsSystemInstaller", menuName = "Installers/AnalyticsSystemInstaller")]
 	public class AnalyticsSystemInstaller : ScriptableObjectInstaller
 	{
-		public AnalysticsSettigns settigns;
+		public bool enableUnity = true;
+		public bool enableAmplitude = true;
+
+#if ENABLE_AMPLITUDE_ANALYTICS
+		public AmplitudeSettings amplitudeSettings;
+#endif
 
 		public override void InstallBindings()
 		{
+#if ENABLE_UNITY_ANALYTICS
 			Container.BindInterfacesAndSelfTo<UnityAnalyticsGroup>().AsSingle().NonLazy();
+#endif
+#if ENABLE_AMPLITUDE_ANALYTICS
+			Container.BindInstance(amplitudeSettings).WhenInjectedInto<AmplitudeAnalyticsGroup>();
+			Container.BindInterfacesAndSelfTo<AmplitudeAnalyticsGroup>().AsSingle().NonLazy();
+#endif
 
-			IAnalyticsGroup group = Container.Resolve<UnityAnalyticsGroup>();
-			Container.BindInstance(new List<IAnalyticsGroup>() { group }).WhenInjectedInto<AnalyticsSystem>();
+			Container.BindInstance(new List<IAnalyticsGroup>() {
+#if ENABLE_UNITY_ANALYTICS
+				Container.Resolve<UnityAnalyticsGroup>(),
+#endif
+#if ENABLE_AMPLITUDE_ANALYTICS
+				Container.Resolve<AmplitudeAnalyticsGroup>()
+#endif
+			}).WhenInjectedInto<AnalyticsSystem>();
 			Container.Bind<AnalyticsSystem>().AsSingle().NonLazy();
 		}
 	}
 
+#if ENABLE_AMPLITUDE_ANALYTICS
 	[System.Serializable]
-	public class AnalysticsSettigns
+	public class AmplitudeSettings
 	{
-		public string amplitudeApiKey;
+		public string apiKey;
 	}
+#endif
 }
