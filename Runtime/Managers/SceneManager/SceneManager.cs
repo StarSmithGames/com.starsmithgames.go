@@ -17,8 +17,6 @@ namespace StarSmithGames.Go.SceneManager
 	{
 		public IProgressHandler ProgressHandler { get; private set; }
 
-		private Dictionary<string, IResourceLocation> resourceLocations = new Dictionary<string, IResourceLocation>();
-
 		private string currentScene;
 
 		public SceneManager()
@@ -29,6 +27,11 @@ namespace StarSmithGames.Go.SceneManager
 		public Scene GetActiveScene()
 		{
 			return UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+		}
+
+		public void LoadSceneForce(int scene)
+		{
+			UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
 		}
 
 		private IEnumerator LoadFromBuild(string sceneName, bool allow)
@@ -53,6 +56,8 @@ namespace StarSmithGames.Go.SceneManager
 		}
 
 #if ADDRESSABLES
+		private Dictionary<string, IResourceLocation> resourceLocations = new Dictionary<string, IResourceLocation>();
+
 		private IEnumerator LoadFromAddressables(string sceneName)
 		{
 			AddressablesProgressHandle progressHandle = new();
