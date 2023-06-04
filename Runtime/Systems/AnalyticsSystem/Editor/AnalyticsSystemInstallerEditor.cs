@@ -1,5 +1,7 @@
 ﻿using UnityEditor;
 
+using UnityEngine;
+
 namespace StarSmithGames.Go.AnalyticsSystem
 {
 	[CustomEditor(typeof(AnalyticsSystemInstaller))]
@@ -26,6 +28,15 @@ namespace StarSmithGames.Go.AnalyticsSystem
 					StarSmithDefineSymbols.EnableDefine(StarSmithDefineSymbols.ENABLE_AMPLITUDE, obj.enableAmplitude);
 				}
 			}
+
+			GUILayout.Space(50f);
+			GUILayout.BeginHorizontal();
+			GUILayout.FlexibleSpace();
+			if (GUILayout.Button("Refresh Defines", GUILayout.Width(100f)))
+			{
+				StarSmithDefineSymbols.Refresh();
+			}
+			GUILayout.EndHorizontal();
 		}
 	}
 }

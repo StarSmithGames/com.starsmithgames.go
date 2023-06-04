@@ -22,6 +22,11 @@ namespace StarSmithGames
 
 		static StarSmithDefineSymbols()
 		{
+			Refresh();
+		}
+
+		public static void Refresh()
+		{
 			var asset = AssetDatabaseExtensions.LoadAsset<AnalyticsSystemInstaller>();
 
 			var unityDefines = GetUnityDefines();
