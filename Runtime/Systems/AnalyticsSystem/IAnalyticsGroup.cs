@@ -23,17 +23,17 @@ namespace StarSmithGames.Go.AnalyticsSystem
 		}
 	}
 
-	//stub
+#if ENABLE_AMPLITUDE
 	public class AmplitudeAnalyticsGroup : IAnalyticsGroup
 	{
-		//private Amplitude instance;
+		private Amplitude instance;
 
 		public AmplitudeAnalyticsGroup(string apiKey)
 		{
-			//instance = Amplitude.Instance;
-			//instance.logging = true;
-			//instance.trackSessionEvents(true);
-			////instance.init(apiKey);
+			instance = Amplitude.Instance;
+			instance.logging = true;
+			instance.trackSessionEvents(true);
+			//instance.init(apiKey);
 		}
 
 		public void LogEvent(string id)
@@ -46,6 +46,7 @@ namespace StarSmithGames.Go.AnalyticsSystem
 			//instance.logEvent(id, parameters);
 		}
 	}
+#endif
 
 	//stub
 	public class AppMetricaAnalyticsGroup : IAnalyticsGroup
