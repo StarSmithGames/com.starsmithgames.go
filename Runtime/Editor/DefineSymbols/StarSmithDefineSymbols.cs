@@ -13,11 +13,13 @@ namespace StarSmithGames
 	{
 		public const string ENABLE_UNITY_ANALYTICS = "ENABLE_UNITY_ANALYTICS";
 		public const string ENABLE_AMPLITUDE = "ENABLE_AMPLITUDE_ANALYTICS";
+		public const string ENABLE_APPSFLYER_ANALYTICS = "ENABLE_APPSFLYER_ANALYTICS";
 
 		public static readonly string[] DEFINES = new string[]
 		{
 			ENABLE_UNITY_ANALYTICS,
 			ENABLE_AMPLITUDE,
+			ENABLE_APPSFLYER_ANALYTICS
 		};
 
 		static StarSmithDefineSymbols()
@@ -34,9 +36,19 @@ namespace StarSmithGames
 				var unityDefines = GetUnityDefines();
 				unityDefines.AddRange(DEFINES.Except(unityDefines));
 
+				if (!asset.enableUnity)
+				{
+					unityDefines.Remove(ENABLE_UNITY_ANALYTICS);
+				}
+
 				if (!asset.enableAmplitude)
 				{
 					unityDefines.Remove(ENABLE_AMPLITUDE);
+				}
+
+				if (!asset.enableAppsFlyer)
+				{
+					unityDefines.Remove(ENABLE_APPSFLYER_ANALYTICS);
 				}
 
 				SaveDefines(unityDefines);

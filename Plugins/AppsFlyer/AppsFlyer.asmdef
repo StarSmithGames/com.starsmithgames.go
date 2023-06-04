@@ -1,0 +1,16 @@
+{
+    "name": "AppsFlyer",
+    "rootNamespace": "",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "ENABLE_APPSFLYER_ANALYTICS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

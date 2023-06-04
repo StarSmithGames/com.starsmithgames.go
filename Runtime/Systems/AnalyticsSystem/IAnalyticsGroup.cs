@@ -1,9 +1,5 @@
 using System.Collections.Generic;
 
-#if ENABLE_UNITY_ANALYTICS
-using UnityEngine.Analytics;
-#endif
-
 namespace StarSmithGames.Go.AnalyticsSystem
 {
 	public interface IAnalyticsGroup
@@ -17,12 +13,12 @@ namespace StarSmithGames.Go.AnalyticsSystem
 	{
 		public void LogEvent(string id)
 		{
-			Analytics.CustomEvent(id);
+			UnityEngine.Analytics.Analytics.CustomEvent(id);
 		}
 
 		public void LogEvent(string id, Dictionary<string, object> parameters)
 		{
-			Analytics.CustomEvent(id, parameters);
+			UnityEngine.Analytics.Analytics.CustomEvent(id, parameters);
 		}
 	}
 #endif
@@ -120,20 +116,27 @@ namespace StarSmithGames.Go.AnalyticsSystem
 		//}
 	}
 
-	//stub
+
+#if ENABLE_APPSFLYER_ANALYTICS
 	public class AppsFlyerAnalyticsGroup : IAnalyticsGroup
 	{
+		public AppsFlyerAnalyticsGroup(AppsFlyerSettings settings)
+		{
+			AppsFlyerSDK.AppsFlyer.initSDK(settings.devKey, settings.appID);//getConversionData()
+			AppsFlyerSDK.AppsFlyer.startSDK();
+		}
+
 		public void LogEvent(string id)
 		{
-			//AppsFlyer.sendEvent(id);
+			AppsFlyerSDK.AppsFlyer.sendEvent(id, null);
 		}
 
 		public void LogEvent(string id, Dictionary<string, object> parameters)
 		{
-			//AppsFlyer.sendEvent(id, parameters);
+			AppsFlyerSDK.AppsFlyer.sendEvent(id, ConvertParams(parameters));
 		}
 
-		private Dictionary<string, string> ConvertParamDictionary(Dictionary<string, object> param)
+		private Dictionary<string, string> ConvertParams(Dictionary<string, object> param)
 		{
 			var convertedParam = new Dictionary<string, string>();
 			foreach (var keyValuePair in param)
@@ -144,4 +147,5 @@ namespace StarSmithGames.Go.AnalyticsSystem
 			return convertedParam;
 		}
 	}
+#endif
 }

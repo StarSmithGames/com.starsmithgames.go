@@ -13,6 +13,7 @@ namespace StarSmithGames.Go.AnalyticsSystem
 
 			var lastUnity = obj.enableUnity;
 			var lastAmplitude = obj.enableAmplitude;
+			var lastAppsFlyer = obj.enableAppsFlyer;
 
 			EditorGUI.BeginChangeCheck();
 			base.OnInspectorGUI();
@@ -26,6 +27,11 @@ namespace StarSmithGames.Go.AnalyticsSystem
 				if (lastAmplitude != obj.enableAmplitude)
 				{
 					StarSmithDefineSymbols.EnableDefine(StarSmithDefineSymbols.ENABLE_AMPLITUDE, obj.enableAmplitude);
+				}
+
+				if (lastAppsFlyer != obj.enableAppsFlyer)
+				{
+					StarSmithDefineSymbols.EnableDefine(StarSmithDefineSymbols.ENABLE_APPSFLYER_ANALYTICS, obj.enableAmplitude);
 				}
 			}
 
