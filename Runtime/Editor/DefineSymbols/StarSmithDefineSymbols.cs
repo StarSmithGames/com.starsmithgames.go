@@ -29,18 +29,18 @@ namespace StarSmithGames
 		{
 			var asset = AssetDatabaseExtensions.LoadAsset<AnalyticsSystemInstaller>();
 
-			var unityDefines = GetUnityDefines();
-			unityDefines.AddRange(DEFINES.Except(unityDefines));
-
 			if (asset != null)
 			{
+				var unityDefines = GetUnityDefines();
+				unityDefines.AddRange(DEFINES.Except(unityDefines));
+
 				if (!asset.enableAmplitude)
 				{
 					unityDefines.Remove(ENABLE_AMPLITUDE);
 				}
-			}
 
-			SaveDefines(unityDefines);
+				SaveDefines(unityDefines);
+			}
 		}
 
 		public static void EnableDefine(string define, bool trigger)
