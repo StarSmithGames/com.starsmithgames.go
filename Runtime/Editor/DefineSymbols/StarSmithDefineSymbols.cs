@@ -41,6 +41,13 @@ namespace StarSmithGames
 
 				SaveDefines(unityDefines);
 			}
+			else
+			{
+				for (int i = 0; i < DEFINES.Length; i++)
+				{
+					TryRemoveDefine(DEFINES[i]);
+				}
+			}
 		}
 
 		public static void EnableDefine(string define, bool trigger)
@@ -68,6 +75,16 @@ namespace StarSmithGames
 		{
 			string scriptingDefinesString = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
 			return scriptingDefinesString.Split(';').ToList();
+		}
+
+		private static void TryRemoveDefine(string define)
+		{
+			var unityDefines = GetUnityDefines();
+			if (unityDefines.Contains(define))
+			{
+				unityDefines.Remove(define);
+			}
+			SaveDefines(unityDefines);
 		}
 
 		private static void SaveDefines(List<string> unityDefines)
