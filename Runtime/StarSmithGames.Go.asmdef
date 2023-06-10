@@ -13,7 +13,9 @@
         "GUID:9e24947de15b9834991c9d8411ea37cf",
         "GUID:84651a3751eca9349aac36a66bba901b",
         "GUID:60bfecf5cb232594891bc622f40d6bed",
-        "GUID:08d1c582746949b40ba6a45cdb776bdf"
+        "GUID:08d1c582746949b40ba6a45cdb776bdf",
+        "GUID:ac145e6b8c6034cdbadc8c6e26aedbcf",
+        "GUID:1e8e55397bd004beaba78a667566665f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -27,6 +29,11 @@
             "name": "com.unity.purchasing",
             "expression": "4.9.2",
             "define": "PURCHASING"
+        },
+        {
+            "name": "com.unity.mobile.notifications",
+            "expression": "2.1.1",
+            "define": "NOTIFICATIONS"
         },
         {
             "name": "com.unity.addressables",
