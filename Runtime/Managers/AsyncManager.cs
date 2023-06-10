@@ -2,5 +2,5 @@ using UnityEngine;
 
 namespace StarSmithGames.Go.AsyncManager
 {
-    public class AsyncManager : MonoBehaviour { }
+	public class AsyncManager : MonoBehaviour { }
 }

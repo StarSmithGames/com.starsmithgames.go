@@ -8,9 +8,9 @@ using Zenject;
 namespace StarSmithGames.Go
 {
 	[RequireComponent(typeof(Button))]
-    public abstract class UIButtonComponent : MonoBehaviour
-    {
-        [SerializeField]
+	public abstract class UIButtonComponent : MonoBehaviour
+	{
+		[SerializeField]
 		private Button button;
 
 		[Inject]

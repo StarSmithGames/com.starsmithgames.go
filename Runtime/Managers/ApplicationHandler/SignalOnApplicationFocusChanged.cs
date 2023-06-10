@@ -1,7 +1,7 @@
 namespace StarSmithGames.Go.ApplicationHandler
 {
-    public struct SignalOnApplicationFocusChanged
-    {
-        public bool trigger;
-    }
+	public struct SignalOnApplicationFocusChanged
+	{
+		public bool trigger;
+	}
 }
