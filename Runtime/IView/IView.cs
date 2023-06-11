@@ -16,6 +16,7 @@ namespace StarSmithGames.Go
 
 	public abstract class ViewBase : MonoBehaviour, IView
 	{
+		public bool IsEnable { get; protected set; }
 		public bool IsShowing { get; protected set; }
 		public bool IsInProcess { get; protected set; }
 
@@ -61,6 +62,7 @@ namespace StarSmithGames.Go
 		{
 			canvasGroup.Enable(trigger);
 			IsShowing = trigger;
+			IsEnable = trigger;
 		}
 
 		[ContextMenu("Open Close")]
