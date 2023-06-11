@@ -1,3 +1,4 @@
+#if NOTIFICATIONS
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -60,3 +61,4 @@ namespace StarSmithGames.Go.NotificationService
 
 	//https://docs.unity3d.com/Packages/com.unity.mobile.notifications@1.4/api/Unity.Notifications.Android.AndroidNotificationChannel.html?q=canBypassDnd#:~:text=Properties-,CanBypassDnd,-Whether%20or%20not
 }
+#endif
