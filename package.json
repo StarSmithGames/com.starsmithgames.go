@@ -1,7 +1,7 @@
 {
     "name" : "com.starsmithgames.go",
     "displayName" : "StarSmith Games Go",
-    "version" : "0.3.2",
+    "version" : "0.3.3",
     "unity" : "2021.3",
     "unityRelease": "24f1",
     "author" : "StarSmith Games",
