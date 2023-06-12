@@ -17,11 +17,15 @@ namespace StarSmithGames.Go.SceneManager
 	{
 		public IProgressHandler ProgressHandler { get; private set; }
 
-		private string currentScene;
+		private Scene currentScene;
 
-		public SceneManager()
+		private AsyncManager.AsyncManager asyncManager;
+
+		public SceneManager(AsyncManager.AsyncManager asyncManager)
 		{
-			currentScene = GetActiveScene().name;
+			this.asyncManager = asyncManager;
+
+			currentScene = GetActiveScene();
 		}
 
 		public Scene GetActiveScene()
@@ -34,20 +38,29 @@ namespace StarSmithGames.Go.SceneManager
 			UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
 		}
 
-		private IEnumerator LoadFromBuild(string sceneName, bool allow)
+		public void LoadSceneAsync(string sceneName, bool allow)
 		{
-			var sceneNameUnity = $"{sceneName}";//.unity
+			var scene = UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneName);
+			asyncManager.StartCoroutine(LoadFromBuild(scene.buildIndex, allow));
+		}
 
+		public void LoadSceneAsync(int sceneBuildIndex, bool allow)
+		{
+			asyncManager.StartCoroutine(LoadFromBuild(sceneBuildIndex, allow));
+		}
+
+		private IEnumerator LoadFromBuild(int sceneBuildIndex, bool allow)
+		{
 			BuildProgressHandler handle = new();
 			ProgressHandler = handle;
 
-			handle.asyncOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneNameUnity, LoadSceneMode.Single);
+			handle.asyncOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneBuildIndex, LoadSceneMode.Single);
 			handle.asyncOperation.allowSceneActivation = allow;
 			yield return handle.asyncOperation;
 
 			if (handle.asyncOperation.isDone)
 			{
-				currentScene = sceneName;
+				currentScene = GetActiveScene();
 			}
 			else
 			{
@@ -85,7 +98,7 @@ namespace StarSmithGames.Go.SceneManager
 
 				if (progressHandle.sceneHandle.Status == AsyncOperationStatus.Succeeded)
 				{
-					currentScene = sceneName;
+					currentScene = GetActiveScene();
 				}
 				else if (progressHandle.sceneHandle.Status == AsyncOperationStatus.Failed)
 				{
