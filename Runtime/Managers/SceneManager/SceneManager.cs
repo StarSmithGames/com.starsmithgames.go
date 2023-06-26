@@ -38,13 +38,14 @@ namespace StarSmithGames.Go.SceneManager
 			UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
 		}
 
-		public void LoadSceneAsync(string sceneName, bool allow)
+		#region Load From Build
+		public void LoadSceneAsyncFromBuild(string sceneName, bool allow)
 		{
 			var scene = UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneName);
 			asyncManager.StartCoroutine(LoadFromBuild(scene.buildIndex, allow));
 		}
 
-		public void LoadSceneAsync(int sceneBuildIndex, bool allow)
+		public void LoadSceneAsyncFromBuild(int sceneBuildIndex, bool allow)
 		{
 			asyncManager.StartCoroutine(LoadFromBuild(sceneBuildIndex, allow));
 		}
@@ -67,19 +68,24 @@ namespace StarSmithGames.Go.SceneManager
 				throw new SceneNoLoadedException();
 			}
 		}
+		#endregion
 
 #if ADDRESSABLES
+		#region Load From Addressables
 		private Dictionary<string, IResourceLocation> resourceLocations = new Dictionary<string, IResourceLocation>();
 
-		private IEnumerator LoadFromAddressables(string sceneName)
+		public void LoadSceneAsyncFromAddressables(string locationKey, string addressableLocationKey)
+		{
+			asyncManager.StartCoroutine(LoadFromAddressables(locationKey, addressableLocationKey));
+		}
+		
+		private IEnumerator LoadFromAddressables(string locationKey, string addressableLocationKey)
 		{
 			AddressablesProgressHandle progressHandle = new();
 			ProgressHandler = progressHandle;
 
-			var sceneNameUnity = $"{sceneName}";//.unity
-
 			IResourceLocation location = null;
-			yield return LoadLocation(sceneName, sceneNameUnity, (x) =>
+			yield return LoadLocation(locationKey, addressableLocationKey, (x) =>
 			{
 				location = x;
 			});
@@ -91,8 +97,8 @@ namespace StarSmithGames.Go.SceneManager
 				yield return progressHandle.sceneHandle;
 				Debug.Log($"[SceneManager] End LoadSceneAsync");
 
-				Debug.Log($"[SceneManager] Start DownloadDependenciesAsync {sceneNameUnity}");
-				progressHandle.dependenciesHandle = Addressables.DownloadDependenciesAsync(sceneNameUnity);
+				Debug.Log($"[SceneManager] Start DownloadDependenciesAsync {addressableLocationKey}");
+				progressHandle.dependenciesHandle = Addressables.DownloadDependenciesAsync(addressableLocationKey);
 				yield return progressHandle.dependenciesHandle;
 				Debug.Log($"[SceneManager] End DownloadDependenciesAsync");
 
@@ -148,6 +154,7 @@ namespace StarSmithGames.Go.SceneManager
 
 			callback.Invoke(location);
 		}
+		#endregion
 #endif
 	}
 
