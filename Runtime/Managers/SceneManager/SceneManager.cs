@@ -149,7 +149,7 @@ namespace StarSmithGames.Go.SceneManager
 
 			if(location == null)
 			{
-				throw new Exception("Location == null");
+				throw new Exception($"Can't load location by key: {locationKey} with addressable: {addressableLocationKey} ");
 			}
 
 			callback.Invoke(location);

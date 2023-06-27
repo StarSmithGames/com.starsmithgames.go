@@ -1,5 +1,6 @@
 using StarSmithGames.Core;
 
+using System;
 using System.Linq;
 
 namespace StarSmithGames.Go
@@ -15,13 +16,13 @@ namespace StarSmithGames.Go
 			return registers.All((x) => !x.IsShowing);
 		}
 
-		public void Show<T>() where T : class, IView
+		public void Show<T>(Action callback = null) where T : class, IView
 		{
-			GetAs<T>().Show();
+			GetAs<T>().Show(callback);
 		}
-		public void Hide<T>() where T : class, IView
+		public void Hide<T>(Action callback = null) where T : class, IView
 		{
-			GetAs<T>().Hide();
+			GetAs<T>().Hide(callback);
 		}
 
 		public void HideAll()

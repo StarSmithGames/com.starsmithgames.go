@@ -22,6 +22,8 @@ namespace StarSmithGames.Go
 
 		public CanvasGroup canvasGroup;
 
+		protected Sequence sequence;
+
 		public virtual void Show(Action callback = null)
 		{
 			IsInProcess = true;
@@ -29,8 +31,8 @@ namespace StarSmithGames.Go
 			canvasGroup.Enable(true, false);
 			IsShowing = true;
 
-			Sequence sequence = DOTween.Sequence();
-
+			sequence?.Kill(true);
+			sequence = DOTween.Sequence();
 			sequence
 				.Append(canvasGroup.DOFade(1f, 0.2f))
 				.AppendCallback(() =>
@@ -44,8 +46,8 @@ namespace StarSmithGames.Go
 		{
 			IsInProcess = true;
 
-			Sequence sequence = DOTween.Sequence();
-
+			sequence?.Kill(true);
+			sequence = DOTween.Sequence();
 			sequence
 				.Append(canvasGroup.DOFade(0f, 0.15f))
 				.AppendCallback(() =>
@@ -65,14 +67,14 @@ namespace StarSmithGames.Go
 			IsEnable = trigger;
 		}
 
+#if UNITY_EDITOR
 		[ContextMenu("Open Close")]
 		private void OpenClose()
 		{
 			Enable(canvasGroup.alpha == 0f ? true : false);
-#if UNITY_EDITOR
 			EditorUtility.SetDirty(gameObject);
-#endif
 		}
+#endif
 	}
 
 	public abstract class ViewPopupBase : ViewBase
@@ -88,8 +90,8 @@ namespace StarSmithGames.Go
 			canvasGroup.Enable(true, false);
 			IsShowing = true;
 
-			Sequence sequence = DOTween.Sequence();
-
+			sequence?.Kill(true);
+			sequence = DOTween.Sequence();
 			sequence
 				.Append(canvasGroup.DOFade(1f, 0.2f))
 				.Join(window.DOScale(1, 0.35f).SetEase(Ease.OutBounce))
@@ -106,8 +108,8 @@ namespace StarSmithGames.Go
 
 			IsInProcess = true;
 
-			Sequence sequence = DOTween.Sequence();
-
+			sequence?.Kill(true);
+			sequence = DOTween.Sequence();
 			sequence
 				.Append(window.DOScale(0, 0.25f).SetEase(Ease.InBounce))
 				.Join(canvasGroup.DOFade(0f, 0.25f))
@@ -133,8 +135,8 @@ namespace StarSmithGames.Go
 			canvasGroup.Enable(true, false);
 			IsShowing = true;
 
-			Sequence sequence = DOTween.Sequence();
-
+			sequence?.Kill(true);
+			sequence = DOTween.Sequence();
 			sequence
 				.Append(canvasGroup.DOFade(1f, 0.2f))
 				.Join(window.DOScale(1, 0.35f).SetEase(Ease.OutQuart))
@@ -151,8 +153,8 @@ namespace StarSmithGames.Go
 
 			IsInProcess = true;
 
-			Sequence sequence = DOTween.Sequence();
-
+			sequence?.Kill(true);
+			sequence = DOTween.Sequence();
 			sequence
 				.Append(canvasGroup.DOFade(0f, 0.15f))
 				.Join(window.DOScale(0, 0.25f).SetEase(Ease.InBounce))
