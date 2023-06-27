@@ -1,39 +1,37 @@
-using StarSmithGames.Go.VibrationService;
+using DG.Tweening;
 
 using UnityEngine;
-using UnityEngine.UI;
-
-using Zenject;
+using UnityEngine.EventSystems;
 
 namespace StarSmithGames.Go
 {
-	[RequireComponent(typeof(Button))]
-	public abstract class UIButtonComponent : MonoBehaviour
+	public class UIButtonComponent : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
 	{
-		[SerializeField]
-		private Button button;
+		[SerializeField] private Transform target;
+		[SerializeField] private float scaleMultiply = 0.95f;
 
-		[Inject]
-		private IVibrationService vibrationService;
+		private Sequence sequence;
+		private Vector3 startScale;
+		private Vector3 endScale;
 
-		protected virtual void Awake()
+		public virtual void OnPointerDown(PointerEventData eventData)
 		{
-			if(button == null)
-			{
-				Debug.LogWarning("[UI] NRE Button Component!");
-				button = GetComponent<Button>();
-			}
-			button.onClick.AddListener(OnClicked);
+			sequence?.Kill(true);
+			sequence = DOTween.Sequence();
+			sequence
+				.Append(target.DOScale(endScale, 0.1f))
+				.SetEase(Ease.Linear);
 		}
 
-		protected virtual void OnDestroy()
+		public virtual void OnPointerUp(PointerEventData eventData)
 		{
-			button.onClick.RemoveAllListeners();
+			sequence?.Kill(true);
+			sequence = DOTween.Sequence();
+			sequence
+				.Append(target.DOScale(startScale, 0.1f))
+				.SetEase(Ease.Linear);
 		}
 
-		protected virtual void OnClicked()
-		{
-			vibrationService.Vibrate();
-		}
+		public virtual void OnPointerClick(PointerEventData eventData) { }
 	}
 }
