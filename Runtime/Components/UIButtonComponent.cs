@@ -14,6 +14,12 @@ namespace StarSmithGames.Go
 		private Vector3 startScale;
 		private Vector3 endScale;
 
+		private void Awake()
+		{
+			startScale = target.localScale;
+			endScale = startScale * scaleMultiply;
+		}
+
 		public virtual void OnPointerDown(PointerEventData eventData)
 		{
 			sequence?.Kill(true);
