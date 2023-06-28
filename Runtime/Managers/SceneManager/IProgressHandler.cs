@@ -37,32 +37,28 @@ namespace StarSmithGames.Go.SceneManager
 
 	public class FictProgressHandler : IProgressHandler
 	{
-		public bool IsDone { get; private set; } = false;
+		public bool IsDone
+		{
+			get
+			{
+				Tick();
+				return progress == 1f;
+			}
+		}
 
 		public float speed = 50f;
-
 		private float progress = 0;
 
-		public void Tick()
+		private void Tick()
 		{
 			var delta = Time.deltaTime * speed * 0.01f;
 			progress += delta;
 			progress = Mathf.Clamp01(progress);
-			IsDone = progress == 1f;
 		}
 
 		public float GetProgress()
 		{
 			return progress;
-		}
-
-		public IEnumerator WaitUntilDone()
-		{
-			yield return new WaitUntil(() =>
-			{
-				Tick();
-				return IsDone;
-			});
 		}
 	}
 
