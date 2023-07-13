@@ -1,7 +1,7 @@
 {
   "name": "com.starsmithgames.go",
   "displayName": "StarSmith Games Go",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "unity": "2021.3",
   "unityRelease": "24f1",
   "author": "StarSmith Games",
@@ -12,5 +12,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/StarSmithGames/com.starsmithgames.go"
+  },
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "^3.1.0"
   }
 }
