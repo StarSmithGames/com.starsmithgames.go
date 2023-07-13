@@ -1,3 +1,5 @@
+using StarSmithGames.IoC;
+
 using UnityEngine;
 
 using Zenject;

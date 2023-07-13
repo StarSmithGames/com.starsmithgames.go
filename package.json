@@ -1,16 +1,16 @@
 {
-    "name" : "com.starsmithgames.go",
-    "displayName" : "StarSmith Games Go",
-    "version" : "0.3.7",
-    "unity" : "2021.3",
-    "unityRelease": "24f1",
-    "author" : "StarSmith Games",
-    "description" : "Additional functionality.",
-    "documentationUrl": "https://www.notion.so/Documentation-dfba05a261a14828b7198cffa46c93e8",
-    "changelogUrl": "https://www.notion.so/Changelog-4c7b13e6f3754d6fb31417ec32755d5b",
-    "licensesUrl": "",
-    "repository": {
-		"type": "git",
-		"url": "https://github.com/StarSmithGames/com.starsmithgames.go"
-	}
+  "name": "com.starsmithgames.go",
+  "displayName": "StarSmith Games Go",
+  "version": "0.3.7",
+  "unity": "2021.3",
+  "unityRelease": "24f1",
+  "author": "StarSmith Games",
+  "description": "Additional functionality.",
+  "documentationUrl": "https://www.notion.so/Documentation-dfba05a261a14828b7198cffa46c93e8",
+  "changelogUrl": "https://www.notion.so/Changelog-4c7b13e6f3754d6fb31417ec32755d5b",
+  "licensesUrl": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StarSmithGames/com.starsmithgames.go"
+  }
 }

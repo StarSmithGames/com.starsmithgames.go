@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using StarSmithGames.IoC.AsyncManager;
 
 #if ADDRESSABLES
 using UnityEngine.AddressableAssets;
@@ -19,9 +20,9 @@ namespace StarSmithGames.Go.SceneManager
 
 		private Scene currentScene;
 
-		private AsyncManager.AsyncManager asyncManager;
+		private AsyncManager asyncManager;
 
-		public SceneManager(AsyncManager.AsyncManager asyncManager)
+		public SceneManager(AsyncManager asyncManager)
 		{
 			this.asyncManager = asyncManager;
 

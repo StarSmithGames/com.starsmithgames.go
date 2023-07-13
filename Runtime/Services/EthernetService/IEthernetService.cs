@@ -1,3 +1,5 @@
+using StarSmithGames.IoC.AsyncManager;
+
 using System;
 using System.Collections;
 using UnityEngine;
@@ -44,7 +46,7 @@ namespace StarSmithGames.Go.EthernetService
 		private Coroutine monitoringCoroutine;
 
 		[Inject]
-		private AsyncManager.AsyncManager asyncManager;
+		private AsyncManager asyncManager;
 
 		private Ping ping;
 
